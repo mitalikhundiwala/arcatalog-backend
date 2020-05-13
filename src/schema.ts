@@ -7,10 +7,22 @@ export const typeDefs = gql`
         displayName: String!
         picture: String!
     }
+
+    type Author {
+        id: String!
+        name: String!
+    }
+
+    type Book {
+        id: String!
+        title: String!
+        author: [Author!]!
+    }
+
     type Query {
         getUsers: [User]!
     }
     type Mutation {
-        createUser(name: String!, email: String!): User!
+        createBook(title: String!, author: [String!]!): Book!
     }
 `;
