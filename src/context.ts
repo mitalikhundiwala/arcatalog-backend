@@ -20,14 +20,13 @@ export const createContext = async ({
         const result = await admin.auth().verifyIdToken(token, true);
         console.log(result);
         if (result) {
-            const user = await prisma.user.findOne({
+            let user = await prisma.user.findOne({
                 where: {
                     userId: result.user_id
                 }
             });
-            console.log(user);
             if (!user) {
-                await UserService.createUser(result);
+                user = await UserService.createUser(result);
             }
             req.user = user;
         }
