@@ -35,6 +35,8 @@ export const typeDefs = gql`
         getUsers: [User]!
         getBooks: [Book]!
         getBook(id: String!): Book!
+        searchAuthors(searchTerm: String!): [Author]!
+        getAuthors: [Author]!
     }
     type Mutation {
         createBook(title: String!, author: [String!]!): Book!

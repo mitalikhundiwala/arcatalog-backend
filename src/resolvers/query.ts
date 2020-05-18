@@ -20,9 +20,9 @@ export const query = {
     },
 
     getBook: async (parent: any, args: any, ctx: Context) => {
-        // if (!ctx.req.user) {
-        //     throw new AuthenticationError('You must be logged in!');
-        // }
+        if (!ctx.req.user) {
+            throw new AuthenticationError('You must be logged in!');
+        }
         return await ctx.prisma.book.findOne({
             where: {
                 id: args.id
@@ -31,5 +31,26 @@ export const query = {
                 author: true
             }
         });
+    },
+
+    searchAuthors: async (parent: any, args: any, ctx: Context) => {
+        if (!ctx.req.user) {
+            throw new AuthenticationError('You must be logged in!');
+        }
+        const authors = await ctx.prisma.author.findMany({
+            where: {
+                name: {
+                    contains: args.searchTerm
+                }
+            }
+        });
+        return authors;
+    },
+
+    getAuthors: async (parent: any, args: any, ctx: Context) => {
+        if (!ctx.req.user) {
+            throw new AuthenticationError('You must be logged in!');
+        }
+        return await ctx.prisma.author.findMany();
     }
 };
