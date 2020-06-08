@@ -1,4 +1,4 @@
-import { ApolloServer, AuthenticationError } from 'apollo-server';
+import { ApolloServer } from 'apollo-server';
 import { typeDefs } from './schema';
 import { createContext } from './context';
 import { query } from './resolvers/query';
