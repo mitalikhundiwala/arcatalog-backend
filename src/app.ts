@@ -11,7 +11,9 @@ function initializeApp() {
             Query: query,
             Mutation: mutation
         },
-        context: createContext
+        context: createContext,
+        introspection: true,
+        playground: true
     });
     return server;
 }
