@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "ts-node-dev --no-notify --respawn --transpileOnly src/index",
     "build": "npx prisma generate && npx prisma migrate up --experimental",
-    "start": "ts-node-dev --no-notify --respawn --transpileOnly src/index"
+    "start": "ts-node src/index"
   },
   "keywords": [],
   "author": "",
