@@ -28,7 +28,8 @@ export const query = {
                 id: args.id
             },
             include: {
-                author: true
+                author: true,
+                category: true
             }
         });
     },
@@ -52,5 +53,9 @@ export const query = {
             throw new AuthenticationError('You must be logged in!');
         }
         return await ctx.prisma.author.findMany();
+    },
+
+    getCategories: async (parent: any, args: any, ctx: Context) => {
+        return await ctx.prisma.category.findMany();
     }
 };

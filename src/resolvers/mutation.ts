@@ -23,7 +23,14 @@ export const mutation = {
                             name: author.name
                         };
                     })
-                }
+                },
+                category: {
+                    connect: {
+                        id: args.category
+                    }
+                },
+                frontCoverImage: args.frontCoverImage,
+                backCoverImage: args.backCoverImage
             }
         });
     },
@@ -38,8 +45,9 @@ export const mutation = {
                 create: { name: author }
             });
         });
+        console.log('=======', args);
         const authors = await Promise.all(authorPromises);
-        return await ctx.prisma.book.update({
+        const p = await ctx.prisma.book.update({
             where: {
                 id: args.id
             },
@@ -51,7 +59,35 @@ export const mutation = {
                             name: author.name
                         };
                     })
-                }
+                },
+                category: {
+                    connect: {
+                        id: args.category
+                    }
+                },
+                frontCoverImage: args.frontCoverImage,
+                backCoverImage: args.backCoverImage
+            }
+        });
+        console.log(p);
+        return p;
+    },
+
+    createCategory: async (parent: any, args: any, ctx: Context) => {
+        return await ctx.prisma.category.create({
+            data: {
+                name: args.name
+            }
+        });
+    },
+
+    updateCategory: async (parent: any, args: any, ctx: Context) => {
+        return await ctx.prisma.category.update({
+            where: {
+                id: args.id
+            },
+            data: {
+                name: args.name
             }
         });
     }

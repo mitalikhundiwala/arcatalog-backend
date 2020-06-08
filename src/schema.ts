@@ -27,6 +27,17 @@ export const typeDefs = gql`
         id: String!
         title: String!
         author: [Author!]!
+        frontCoverImage: String
+        backCoverImage: String
+        category: Category
+        categoryId: String
+        createdAt: String
+        updatedAt: String
+    }
+
+    type Category {
+        id: String!
+        name: String!
         createdAt: String
         updatedAt: String
     }
@@ -37,9 +48,26 @@ export const typeDefs = gql`
         getBook(id: String!): Book!
         searchAuthors(searchTerm: String!): [Author]!
         getAuthors: [Author]!
+        getCategories: [Category]!
     }
+
     type Mutation {
-        createBook(title: String!, author: [String!]!): Book!
-        updateBook(id: String!, title: String, author: [String!]): Book!
+        createBook(
+            title: String!
+            author: [String!]!
+            category: String
+            frontCoverImage: String
+            backCoverImage: String
+        ): Book!
+        updateBook(
+            id: String!
+            title: String
+            author: [String!]
+            category: String
+            frontCoverImage: String
+            backCoverImage: String
+        ): Book!
+        createCategory(name: String!): Category!
+        updateCategory(id: String!, name: String!): Category!
     }
 `;

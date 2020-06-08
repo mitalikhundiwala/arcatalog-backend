@@ -34,6 +34,18 @@ model Book {
   id        String   @default(uuid()) @id
   title     String
   author    Author[] @relation(references: [id])
+  frontCoverImage String?
+  backCoverImage String?
+  category Category? @relation(references: id, fields: categoryId)
+  categoryId  String? 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Category {
+  id        String   @default(uuid()) @id
+  name String
+  books Book[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
