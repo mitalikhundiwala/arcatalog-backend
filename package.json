@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "ts-node-dev --no-notify --respawn --transpileOnly src/index",
-    "build": "npx prisma generate && npx prisma migrate up --experimental",
+    "build": "npx prisma generate -- --env-file .env.prod && dotenv -e ./prisma/.env.prod -- npx prisma migrate up --experimental",
     "start": "ts-node src/index"
   },
   "keywords": [],
@@ -19,6 +19,7 @@
     "@types/node": "^13.13.9",
     "@typescript-eslint/eslint-plugin": "^2.34.0",
     "@typescript-eslint/parser": "^2.34.0",
+    "dotenv-cli": "^3.1.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.3",
