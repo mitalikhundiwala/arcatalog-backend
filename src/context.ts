@@ -15,7 +15,7 @@ export const createContext = async ({
     req: any;
 }): Promise<Context> => {
     const token = req.headers.authorization || null;
-
+    console.log('token', token);
     try {
         const result = await admin.auth().verifyIdToken(token, true);
         console.log(result);
@@ -25,6 +25,7 @@ export const createContext = async ({
                     userId: result.user_id
                 }
             });
+            console.log('user', user);
             if (!user) {
                 user = await UserService.createUser(result);
             }
